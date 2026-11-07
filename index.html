@@ -1,0 +1,1167 @@
+<title>Venu Reddy K S</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* ── TOKENS ── dark-first, single committed visual world ── */
+:root {
+  --bg:        #07080C;
+  --bg2:       #0D0F17;
+  --bg3:       #131620;
+  --surface:   #191C28;
+  --border:    rgba(255,255,255,0.07);
+  --fg:        #E8EAF0;
+  --fg2:       #9BA3B8;
+  --fg3:       #5C6480;
+  --accent:    #4F8EF7;       /* electric blue */
+  --accent2:   #7B5CF7;       /* violet */
+  --accent3:   #2DD4BF;       /* teal — Cribl/detection */
+  --accent-glow: rgba(79,142,247,0.15);
+  --mono:      'JetBrains Mono', monospace;
+  --display:   'Syne', sans-serif;
+  --body:      'Inter', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+/* light override — if someone's in light mode */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg:       #F0F2F8;
+    --bg2:      #E8EBF4;
+    --bg3:      #DDE1EF;
+    --surface:  #FFFFFF;
+    --border:   rgba(0,0,0,0.08);
+    --fg:       #0D0F17;
+    --fg2:      #3D4461;
+    --fg3:      #8891AA;
+    --accent-glow: rgba(79,142,247,0.1);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg:       #F0F2F8;
+  --bg2:      #E8EBF4;
+  --bg3:      #DDE1EF;
+  --surface:  #FFFFFF;
+  --border:   rgba(0,0,0,0.08);
+  --fg:       #0D0F17;
+  --fg2:      #3D4461;
+  --fg3:      #8891AA;
+  --accent-glow: rgba(79,142,247,0.1);
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ── NOISE TEXTURE overlay ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: env(safe-area-inset-top, 0px);
+  left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px max(24px, env(safe-area-inset-left, 0px));
+  background: rgba(7,8,12,0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 101;
+  background: rgba(7,8,12,0.8);
+}
+
+.nav-logo {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--fg3);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px max(48px, 6vw) 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated grid background */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(79,142,247,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,142,247,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+
+/* Glowing orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%);
+  top: -100px; right: -100px;
+}
+.orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(123,92,247,0.08) 0%, transparent 70%);
+  bottom: 0; left: 10%;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  max-width: 14ch;
+  margin-bottom: 12px;
+}
+
+.hero h1 .line2 {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--fg3);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--fg2);
+  max-width: 52ch;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 44px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 5px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  color: var(--fg2);
+  background: var(--surface);
+  letter-spacing: 0.04em;
+}
+
+.tag.accent { border-color: rgba(79,142,247,0.4); color: var(--accent); background: rgba(79,142,247,0.08); }
+.tag.violet { border-color: rgba(123,92,247,0.4); color: var(--accent2); background: rgba(123,92,247,0.08); }
+.tag.teal   { border-color: rgba(45,212,191,0.4); color: var(--accent3); background: rgba(45,212,191,0.08); }
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-primary {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  padding: 12px 28px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+.btn-ghost {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--fg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── STAT BAR ── */
+.stat-bar {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 0 -16px;
+  padding: 0 16px;
+  overflow-x: auto;
+}
+
+.stat {
+  flex: 1;
+  min-width: 140px;
+  padding: 28px 24px;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.stat:last-child { border-right: none; }
+
+.stat-num {
+  font-family: var(--display);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-num span { color: var(--accent); }
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--fg3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ── SECTION ── */
+section {
+  padding: 96px max(48px, 6vw);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-wrap: balance;
+  margin-bottom: 48px;
+}
+
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.project-card {
+  background: var(--bg2);
+  padding: 36px;
+  position: relative;
+  transition: background 0.25s;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.project-card:hover { background: var(--surface); }
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 36px; right: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.project-card:hover::before { opacity: 1; }
+
+.project-num {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--fg3);
+  letter-spacing: 0.1em;
+}
+
+.project-title {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.project-title a {
+  color: var(--fg);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.project-title a:hover { color: var(--accent); }
+
+.project-desc {
+  font-size: 0.875rem;
+  color: var(--fg2);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.project-tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: var(--bg3);
+  color: var(--fg3);
+  letter-spacing: 0.04em;
+}
+
+.project-impact {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--accent3);
+  letter-spacing: 0.04em;
+  padding: 10px 14px;
+  background: rgba(45,212,191,0.06);
+  border-left: 2px solid var(--accent3);
+  border-radius: 0 4px 4px 0;
+  line-height: 1.5;
+}
+
+/* ── SKILLS ── */
+.skills-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.skill-group {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+}
+
+.skill-group-name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  color: var(--fg);
+}
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.skill-pill {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  padding: 5px 11px;
+  border-radius: 5px;
+  background: var(--bg3);
+  color: var(--fg2);
+  letter-spacing: 0.03em;
+  transition: background 0.2s, color 0.2s;
+}
+.skill-pill:hover { background: rgba(79,142,247,0.12); color: var(--accent); }
+.skill-pill.strong { color: var(--accent); background: rgba(79,142,247,0.1); }
+
+/* ── CERTS ── */
+.certs-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.cert-card {
+  flex: 1;
+  min-width: 200px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+.cert-card:hover { border-color: var(--accent); }
+
+.cert-issuer {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--fg3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cert-name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.88rem;
+  line-height: 1.3;
+  color: var(--fg);
+}
+
+.cert-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: rgba(79,142,247,0.1);
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+  align-self: flex-start;
+}
+
+/* ── EXPERIENCE ── */
+.exp-item {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 32px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+}
+.exp-item:last-child { border-bottom: none; }
+
+.exp-meta { }
+.exp-date {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+.exp-company {
+  font-size: 0.8rem;
+  color: var(--fg3);
+}
+
+.exp-title {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.exp-desc {
+  font-size: 0.875rem;
+  color: var(--fg2);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.exp-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.exp-bullets li {
+  font-size: 0.82rem;
+  color: var(--fg2);
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.55;
+}
+
+.exp-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+/* ── TERMINAL BIO BLOCK ── */
+.terminal {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 16px;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-r { background: #FF5F57; }
+.dot-y { background: #FEBC2E; }
+.dot-g { background: #28C840; }
+
+.terminal-title {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--fg3);
+  letter-spacing: 0.08em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.terminal-body {
+  padding: 24px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: var(--fg2);
+}
+
+.terminal-body .prompt { color: var(--accent); }
+.terminal-body .cmd    { color: var(--fg); }
+.terminal-body .out    { color: var(--fg2); }
+.terminal-body .hi     { color: var(--accent3); }
+.terminal-body .hi2    { color: var(--accent2); }
+
+/* ── ABOUT ── */
+.about-layout {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 1rem;
+  color: var(--fg2);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.about-text p strong { color: var(--fg); }
+
+.interests-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.interest-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.interest-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.interest-label {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.interest-sub {
+  font-size: 0.72rem;
+  color: var(--fg3);
+  line-height: 1.4;
+}
+
+/* ── CONTACT ── */
+.contact-section {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px max(48px, 6vw);
+  text-align: center;
+}
+
+.contact-section .section-title { margin-bottom: 16px; }
+
+.contact-sub {
+  color: var(--fg2);
+  font-size: 1rem;
+  margin-bottom: 36px;
+  max-width: 46ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.contact-link {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--fg2);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.contact-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(79,142,247,0.05); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 24px max(48px, 6vw);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-left {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--fg3);
+  letter-spacing: 0.06em;
+}
+
+.footer-right {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--fg3);
+  letter-spacing: 0.06em;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .hero { padding: 100px 0 60px; }
+  section { padding: 64px 0; }
+  .hero h1 { font-size: 2.4rem; }
+  .about-layout { grid-template-columns: 1fr; gap: 36px; }
+  .skills-layout { grid-template-columns: 1fr; }
+  .exp-item { grid-template-columns: 1fr; gap: 12px; }
+  .interests-grid { grid-template-columns: 1fr 1fr; }
+  nav .nav-links { display: none; }
+  .stat-bar { flex-wrap: nowrap; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition-duration: 0.01ms !important; }
+}
+</style>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">VK<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero" style="padding-left: max(48px, 6vw); padding-right: max(48px, 6vw);">
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="hero-eyebrow">Security Automation &amp; Detection Engineer · AI Security · Bengaluru</div>
+
+  <h1>
+    Venu<br>
+    Reddy<br>
+    <span class="line2">K S</span>
+  </h1>
+
+  <p class="hero-sub">
+    I build and automate detection systems that think — multi-SIEM pipelines, agentic AI security tools, and automation that eliminated 3–4 FTEs of manual SOC triage across 10+ enterprise environments.
+  </p>
+
+  <div class="hero-tags">
+    <span class="tag accent">Microsoft Sentinel</span>
+    <span class="tag accent">KQL</span>
+    <span class="tag">Splunk</span>
+    <span class="tag teal">Cribl Stream</span>
+    <span class="tag violet">Claude APIs</span>
+    <span class="tag">MITRE ATT&CK</span>
+    <span class="tag">Python</span>
+    <span class="tag teal">Google SecOps</span>
+    <span class="tag">CI/CD</span>
+  </div>
+
+  <div class="hero-cta">
+    <a href="https://github.com/HungryBrain-bot" target="_blank" class="btn-primary">View GitHub</a>
+    <a href="https://linkedin.com/in/venureddyks" target="_blank" class="btn-ghost">LinkedIn →</a>
+  </div>
+</section>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat">
+    <div class="stat-num">2<span>+</span></div>
+    <div class="stat-label">Years at<br>CyberProof MSSP</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">50<span>+</span></div>
+    <div class="stat-label">Log source<br>integrations</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">10<span>+</span></div>
+    <div class="stat-label">Enterprise<br>environments</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3<span>–4</span></div>
+    <div class="stat-label">FTEs eliminated<br>via automation</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">512</div>
+    <div class="stat-label">Sentinel rule limit<br>re-engineered</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5<span>×</span></div>
+    <div class="stat-label">Certifications<br>earned</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="section-title">Engineer at the intersection<br>of security and AI</div>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+      <div class="terminal-title">venu@cyberproof ~ profile.sh</div>
+    </div>
+    <div class="terminal-body">
+      <div><span class="prompt">❯</span> <span class="cmd">whoami</span></div>
+      <div class="out">Detection Engineer @ CyberProof (UST Global) · Bengaluru, India</div>
+      <br>
+      <div><span class="prompt">❯</span> <span class="cmd">cat interests.txt</span></div>
+      <div class="out"><span class="hi">AI Security</span> · <span class="hi">Detection Engineering</span> · <span class="hi2">LLM Threat Research</span></div>
+      <div class="out">Cloud Threat Hunting · CTF · Security Automation · Open Source</div>
+      <br>
+      <div><span class="prompt">❯</span> <span class="cmd">git log --oneline projects/</span></div>
+      <div class="out"><span class="hi">a3f9d1c</span> detection_As_Code — multi-SIEM CI/CD pipeline</div>
+      <div class="out"><span class="hi2">b7e2a4f</span> OpsMind — agentic LLM security assistant</div>
+      <div class="out"><span class="hi">c1d8e6b</span> attackKnowledgeGraph — RAG over MITRE ATT&CK</div>
+      <div class="out"><span class="hi2">d4f1c9a</span> Log Intelligence Platform — autonomous IR</div>
+      <br>
+      <div><span class="prompt">❯</span> <span class="cmd">echo $STATUS</span></div>
+      <div class="out"><span class="hi">Open to new opportunities</span> · eJPT · CCDV-F · CCAR-F · Cribl Admin</div>
+    </div>
+  </div>
+
+  <div class="about-layout">
+    <div class="about-text">
+      <p>
+        I'm a detection engineer who <strong>builds things</strong> — not just someone who monitors dashboards. At CyberProof, I operate Microsoft Sentinel and Splunk for enterprise clients across 10+ environments, writing detection rules, investigating alerts, and tuning signal quality every day.
+      </p>
+      <p>
+        But the work I'm most proud of sits at the boundary between security and AI. I built <strong>OpsMind</strong> — a production-grade agentic security assistant with real guardrails: canary secret detection, scoped tool access, context isolation, and defences mapped to OWASP LLM Top 10. And <strong>detection_As_Code</strong> — a CI/CD pipeline that takes detection engineering seriously, with schema-validated deployment, automated testing, and per-customer MITRE ATT&CK Navigator layers.
+      </p>
+      <p>
+        I think about security as a software engineering problem. When Sentinel's 512-rule hard limit was eating up slots with keep-alive monitoring, I rebuilt the entire monitoring function outside Sentinel using Python and Azure APIs — freeing 30–50 rule slots per customer for actual detection content.
+      </p>
+    </div>
+
+    <div>
+      <div class="interests-grid">
+        <div class="interest-item">
+          <div class="interest-icon">🤖</div>
+          <div class="interest-label">AI Security</div>
+          <div class="interest-sub">LLM threats, agentic guardrails, MITRE ATLAS</div>
+        </div>
+        <div class="interest-item">
+          <div class="interest-icon">🔍</div>
+          <div class="interest-label">Detection Eng.</div>
+          <div class="interest-sub">KQL, SPL, YARA-L, CI/CD pipelines</div>
+        </div>
+        <div class="interest-item">
+          <div class="interest-icon">☁️</div>
+          <div class="interest-label">Cloud Hunting</div>
+          <div class="interest-sub">Azure, Sentinel, cloud telemetry</div>
+        </div>
+        <div class="interest-item">
+          <div class="interest-icon">🏆</div>
+          <div class="interest-label">CTF & Research</div>
+          <div class="interest-sub">Top 2 UST Global, Wiz Cloud Games</div>
+        </div>
+        <div class="interest-item">
+          <div class="interest-icon">⚙️</div>
+          <div class="interest-label">Automation</div>
+          <div class="interest-sub">Python, APIs, eliminating manual work</div>
+        </div>
+        <div class="interest-item">
+          <div class="interest-icon">📡</div>
+          <div class="interest-label">Log Engineering</div>
+          <div class="interest-sub">Cribl, 50+ sources, schema design</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="padding-top: 0;">
+  <div class="section-label">Projects</div>
+  <div class="section-title">Things I've built</div>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-title">
+        <a href="https://github.com/HungryBrain-bot/detection_As_Code" target="_blank">detection_As_Code</a>
+      </div>
+      <div class="project-desc">
+        A production CI/CD pipeline for multi-SIEM detection engineering covering Microsoft Sentinel (KQL), Splunk (SPL), and Google SecOps (YARA-L). Rules are validated against per-customer schemas before deployment — if required telemetry isn't present, the rule is gated. Test harness runs KQL against a Kusto emulator and SPL against a Splunk Enterprise container. MITRE ATT&CK and ATLAS Navigator coverage layers generated per customer.
+      </div>
+      <div class="project-impact">→ Detection content spans endpoint, Entra ID identity, and LLM application threat domains</div>
+      <div class="project-tags">
+        <span class="project-tag">KQL</span>
+        <span class="project-tag">SPL</span>
+        <span class="project-tag">YARA-L</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">CI/CD</span>
+        <span class="project-tag">MITRE ATT&CK</span>
+        <span class="project-tag">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-title">OpsMind</div>
+      <div class="project-desc">
+        A production-grade agentic security assistant built on Claude APIs. Multi-tool orchestration, stateful reasoning, and MCP server integration. Implements first-principles AI guardrails: canary secret injection to detect data exfiltration, scoped tool access to enforce least-privilege on AI agents, and context isolation to prevent cross-session data leakage. Defences mapped to OWASP LLM Top 10 and MITRE ATLAS.
+      </div>
+      <div class="project-impact">→ Covers prompt injection, indirect prompt injection, and insecure agentic tool-use as first-class concerns</div>
+      <div class="project-tags">
+        <span class="project-tag">Claude APIs</span>
+        <span class="project-tag">MCP</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">OWASP LLM Top 10</span>
+        <span class="project-tag">MITRE ATLAS</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-title">
+        <a href="https://github.com/HungryBrain-bot/attackKnowledgeGraph" target="_blank">attackKnowledgeGraph</a>
+      </div>
+      <div class="project-desc">
+        RAG-based system enabling semantic search across MITRE ATT&CK TTPs, ATLAS techniques, and threat actor profiles. Translates adversary research into actionable detection hypotheses — identifying cross-domain detection opportunities from natural language threat queries.
+      </div>
+      <div class="project-impact">→ Bridges threat intelligence and detection use-case development</div>
+      <div class="project-tags">
+        <span class="project-tag">RAG</span>
+        <span class="project-tag">MITRE ATT&CK</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Embeddings</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-title">Log Intelligence Platform</div>
+      <div class="project-desc">
+        End-to-end Python pipeline automating the complete SOC workflow: telemetry ingestion → anomaly detection → alert generation → Jira ticket creation. Deployed across 10+ enterprise environments and 50+ data sources. Also resolved Sentinel's 512 analytical rule limit by moving keep-alive monitoring entirely to Python + Azure APIs — freeing 30–50 rule slots per customer for security detection content.
+      </div>
+      <div class="project-impact">→ Eliminated 3–4 FTEs of manual triage workload across production environments</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Azure APIs</span>
+        <span class="project-tag">Jira</span>
+        <span class="project-tag">Anomaly Detection</span>
+        <span class="project-tag">Automation</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="padding-top: 0;">
+  <div class="section-label">Experience</div>
+  <div class="section-title">Where I've worked</div>
+
+  <div class="exp-item">
+    <div class="exp-meta">
+      <div class="exp-date">Nov 2024 — Present</div>
+      <div class="exp-company">CyberProof · UST Global<br>Bengaluru, India</div>
+    </div>
+    <div>
+      <div class="exp-title">SIEM & Automation Engineer</div>
+      <div class="exp-desc">
+        Detection engineering and security automation for enterprise clients in a managed security services environment.
+      </div>
+      <ul class="exp-bullets">
+        <li>Build and tune KQL detection rules in Microsoft Sentinel covering endpoint, identity (Entra ID), and application threat domains across multi-client environments</li>
+        <li>Onboard 50+ third-party log sources via Cribl Stream — analysing vendor schemas, applying quality gating, and building detection coverage from newly ingested telemetry</li>
+        <li>Engineered around Sentinel's 512-rule hard limit by rebuilding keep-alive monitoring in Python + Azure APIs, freeing 30–50 rule slots per customer for security content</li>
+        <li>Built end-to-end incident response automation in Python, eliminating manual tier-1 and tier-2 analyst steps across 10+ enterprise environments</li>
+        <li>Apply MITRE ATT&CK to map per-customer detection coverage, generate Navigator layers, and prioritise use-case development from threat intelligence</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="padding-top: 0;">
+  <div class="section-label">Skills</div>
+  <div class="section-title">What I work with</div>
+
+  <div class="skills-layout">
+    <div class="skill-group">
+      <div class="skill-group-name">Detection Engineering</div>
+      <div class="skill-pills">
+        <span class="skill-pill strong">KQL / Microsoft Sentinel</span>
+        <span class="skill-pill strong">Splunk ES / SPL</span>
+        <span class="skill-pill">YARA-L / Google SecOps</span>
+        <span class="skill-pill">Detection-as-Code</span>
+        <span class="skill-pill">CI/CD for Security Content</span>
+        <span class="skill-pill">Schema-gated Deployment</span>
+        <span class="skill-pill">False-Positive Reduction</span>
+        <span class="skill-pill">Automated Rule Testing</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">AI & LLM Security</div>
+      <div class="skill-pills">
+        <span class="skill-pill strong">Claude APIs</span>
+        <span class="skill-pill strong">Agentic AI Systems</span>
+        <span class="skill-pill">MCP Server Integration</span>
+        <span class="skill-pill">Prompt Injection Defence</span>
+        <span class="skill-pill">OWASP LLM Top 10</span>
+        <span class="skill-pill">MITRE ATLAS</span>
+        <span class="skill-pill">Canary Secret Detection</span>
+        <span class="skill-pill">Context Isolation</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">Log Engineering & Telemetry</div>
+      <div class="skill-pills">
+        <span class="skill-pill strong">Cribl Stream (Certified)</span>
+        <span class="skill-pill">50+ Log Source Integrations</span>
+        <span class="skill-pill">Vendor Schema Analysis</span>
+        <span class="skill-pill">Data Quality Gating</span>
+        <span class="skill-pill">Azure Activity Logs</span>
+        <span class="skill-pill">Entra ID Telemetry</span>
+        <span class="skill-pill">Sysmon / Windows Security</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">Automation & Python</div>
+      <div class="skill-pills">
+        <span class="skill-pill strong">Python</span>
+        <span class="skill-pill">Azure APIs / REST APIs</span>
+        <span class="skill-pill">Incident Response Automation</span>
+        <span class="skill-pill">Anomaly Detection Pipelines</span>
+        <span class="skill-pill">Jira Integration</span>
+        <span class="skill-pill">RAG Systems</span>
+        <span class="skill-pill">Docker</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section style="padding-top: 0;">
+  <div class="section-label">Certifications</div>
+  <div class="section-title">Credentials</div>
+
+  <div class="certs-row">
+    <div class="cert-card">
+      <div class="cert-issuer">Anthropic · Pearson VUE</div>
+      <div class="cert-name">Claude Certified Developer – Foundations</div>
+      <div class="cert-badge">CCDV-F</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Anthropic · Pearson VUE</div>
+      <div class="cert-name">Claude Certified Architect – Foundations</div>
+      <div class="cert-badge">CCAR-F</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">eLearnSecurity</div>
+      <div class="cert-name">Junior Penetration Tester</div>
+      <div class="cert-badge">eJPT</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Cribl</div>
+      <div class="cert-name">Cribl Certified Admin · Cribl Certified User</div>
+      <div class="cert-badge">Certified Admin</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Wiz · May 2025</div>
+      <div class="cert-name">Cloud Security Excellence – Cloud Hunting Games CTF</div>
+      <div class="cert-badge">CTF Achievement</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="section-label" style="justify-content: center;">Contact</div>
+  <div class="section-title" style="text-align: center;">Let's work together</div>
+  <p class="contact-sub">Open to detection engineering, AI security, and security automation roles. Based in Bengaluru — open to remote.</p>
+  <div class="contact-links">
+    <a href="https://linkedin.com/in/venureddyks" target="_blank" class="contact-link">
+      <span>LinkedIn</span>
+    </a>
+    <a href="https://github.com/HungryBrain-bot" target="_blank" class="contact-link">
+      <span>GitHub</span>
+    </a>
+    <span class="contact-link" style="cursor: default;">
+      <span>venureddyks@gmail.com</span>
+    </span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 · Venu Reddy K S</div>
+  <div class="footer-right">Security Automation &amp; Detection Engineer · AI Security · Bengaluru</div>
+</footer>
